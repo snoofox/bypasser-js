@@ -14,16 +14,16 @@ app.get('/', (req, res) => {
 app.post('/bypass', (req, res) => {
     const url = req.body.url;
     axios.get(url)
-        .then(response => {
+        .then((response) => {
             const $ = cheerio.load(response.data);
             const script = $('script').text();
             const pattern = /link:\s+'(https?:\/\/\S+)'/;
-            const result = pattern.exec(script)
-            res.send(result[1])
+            const result = pattern.exec(script);
+            res.send(result[1]);
         })
-        .error(error => {
-            res.send(error.data)
-        })
+        .catch((error) => {
+            res.send(error.data);
+        });
 })
 
 app.listen(3000, () => {
