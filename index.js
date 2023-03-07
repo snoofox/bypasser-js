@@ -21,6 +21,9 @@ app.post('/bypass', (req, res) => {
             const result = pattern.exec(script)
             res.send(result[1])
         })
+        .error(error => {
+            res.send(error.data)
+        })
 })
 
 app.listen(3000, () => {
